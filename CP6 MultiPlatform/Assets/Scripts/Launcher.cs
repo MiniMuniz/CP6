@@ -11,6 +11,20 @@ public class Launcher : MonoBehaviour
     [SerializeField] private Text textoStatus;
     [SerializeField] private GameObject menuPanel;
     private bool connecting;
+
+
+    private void Start()
+    {
+        if (menuPanel != null)
+        {
+            menuPanel.SetActive(true);
+            Debug.Log("Menu de conexão ativado!");
+        }
+    }
+
+
+
+
     public async void ConnectToRoom()
     {
         if (connecting || runner.IsRunning)

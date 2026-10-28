@@ -6,6 +6,10 @@ using static Unity.Collections.Unicode;
 public class Player : NetworkBehaviour
 {
 
+    [Header("Tiro")]
+    [SerializeField] private float cooldownTiro = 0.3f;
+
+    private float proximoTiro;
 
     [SerializeField] private float velocidade = 5f;
     [SerializeField] private CharacterController controller;
@@ -16,6 +20,8 @@ public class Player : NetworkBehaviour
     [SerializeField] private Transform armaPosition;
 
     [Networked, OnChangedRender(nameof(CorTeam))]
+
+
 
     public byte TeamColor { get; set; }
 
@@ -100,8 +106,15 @@ public class Player : NetworkBehaviour
     }
     private void Atirar()
     {
-        if (bulletPrefab == null || armaPosition == null)
+        if (Time.time < proximoTiro)
             return;
-        Runner.Spawn(bulletPrefab, armaPosition.position, armaPosition.rotation);
+
+        proximoTiro = Time.time + cooldownTiro;
+
+        Runner.Spawn(
+            bulletPrefab,
+            armaPosition.position,
+            armaPosition.rotation
+        );
     }
 }
