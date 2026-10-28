@@ -19,7 +19,7 @@ public class Launcher : MonoBehaviour
         if (string.IsNullOrEmpty(roomName))
         {
             textoStatus.text =
-            "Digite o nome de uma sala!";
+            "É preciso digitar o nome da sala";
             return;
         }
 

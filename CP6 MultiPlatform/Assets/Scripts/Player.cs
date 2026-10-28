@@ -54,14 +54,16 @@ public class Player : NetworkBehaviour
     {
         if (!HasStateAuthority)
             return;
-        DuelMatch match = DuelMatch.Instance;
+        Partida match = Partida.Instance;
         if (match == null || !match.CanPlay)
         {
             firePending = false;
             return;
         }
+
         Mover();
         Mirar();
+
         if (firePending)
         {
             firePending = false;
